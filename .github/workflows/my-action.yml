@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: 
   schedule:
-    - cron: "0 0 7 * *"
+    - cron: "0 22 * * *"
 jobs:
   smzdm:
     runs-on: ubuntu-latest
