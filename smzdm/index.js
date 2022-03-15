@@ -2,7 +2,7 @@
 // create by xyfei
 
 const { sendNotify } = require('../sendNotify')
-const { request } = require('../utils');
+const { request,getRandom } = require('../utils');
 
 // 公共变量
 const SMZDM_COOKIE = process.env.SMZDM_COOKIE
@@ -36,16 +36,15 @@ let smzdmSign = async () => {
 }
 
 //延迟执行签到
-let setTimeSmzdmSign = (cookieSess) => {
+let setTimeSmzdmSign = (min,max) => {
 	setTimeout(() => {
 		//签到
-		smzdmSign(cookieSess);
+		smzdmSign();
 		console.log('签到！！');
-	}, getRandom(1000, 100000));
-	//	}, getRandom(10000, 10000000));
+	}, getRandom(min,max));
 }
 
-smzdmSign()
+setTimeSmzdmSign(10000, 20000)
 
 
 // sendNotify('值得买签到', '恭喜签到成功')

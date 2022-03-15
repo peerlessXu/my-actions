@@ -76,6 +76,13 @@ const request = (method, url, data, requestConfig) => {
   return instance(option)
 }
 
+
+//取随机数 min = 最小值 ； max = 最大值
+let getRandom = (min, max) => {
+	return parseInt(Math.random() * (max - min + 1) + min);
+}
+
 module.exports={
-	request
+	request,
+  getRandom
 }
