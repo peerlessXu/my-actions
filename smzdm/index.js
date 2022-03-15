@@ -28,9 +28,9 @@ let smzdmSign = async () => {
 			sendNotify('什么值得买【签到报错】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${data}`);
 		}
 	} catch (e) {
-		console.log(error);
+		console.log(e);
 		//发邮件
-		sendNotify('什么值得买【签到报错】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${error}`);
+		sendNotify('什么值得买【签到报错】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${e}`);
 	}
 
 }
