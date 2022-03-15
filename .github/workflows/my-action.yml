@@ -5,6 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: run code script
-        run: npm run smzdm
-  
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: npm install
+      - name: run smzdm code
+        run: node ./smzdm/index
+        env:
+          WX_SEND_KEY: ${{ secrets.WX_SEND_KEY }}
+          SEND_EMAIL: ${{ secrets.SEND_EMAIL }}
+          RECEIVE_EMAIL: ${{ secrets.RECEIVE_EMAIL }}
+          SEND_EMAIL_PASS: ${{ secrets.SEND_EMAIL_PASS }}
+          
