@@ -3,6 +3,7 @@
 
 const { sendNotify } = require('../sendNotify')
 const { request, getRandom } = require('../utils');
+const dayjs = require('dayjs')
 
 // 公共变量
 const SMZDM_COOKIE = process.env.SMZDM_COOKIE
@@ -20,17 +21,17 @@ let smzdmSign = async () => {
 		const { data } = await request('get', url, { cookie: SMZDM_COOKIE, referer })
 		console.log('sign data===', data);
 		if (data.indexOf('"error_code":0') != -1) {
-			console.log(new Date().Format("yyyy-MM-dd hh:mm:ss") + ' -- 什么值得买 签到成功!!!!');
+			console.log(dayjs().format("YYYY-MM-DD HH:mm:ss") + ' -- 什么值得买 签到成功!!!!');
 			//记录签到日志
 			sendNotify('什么值得买【签到成功】', `
-			时间: ${new Date().toLocaleString()}  
+			时间: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}  
 			用户: ${SMZDM_USER} 
 			内容: ${data}
 			`);
 		} else {
 			//发邮件
 			sendNotify('什么值得买【签到报错】', `
-			时间: ${new Date().toLocaleString()} 
+			时间: ${dayjs().format("YYYY-MM-DD HH:mm:ss")} 
 			用户: ${SMZDM_USER} 
 			错误内容: ${data}`);
 		}
@@ -38,7 +39,7 @@ let smzdmSign = async () => {
 		console.log(e);
 		//发邮件
 		sendNotify('什么值得买【签到报错】', `
-		时间: ${new Date().toLocaleString()}  
+		时间: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}  
 		用户: ${SMZDM_USER} 
 		错误内容: ${e}`);
 	}
