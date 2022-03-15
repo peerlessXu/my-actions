@@ -9,6 +9,8 @@ const SEND_EMAIL = process.env.SEND_EMAIL;
 const RECEIVE_EMAIL = process.env.RECEIVE_EMAIL;
 const SEND_EMAIL_PASS = process.env.SEND_EMAIL_PASS;
 
+console.log(process.env)
+
 async function sendNotify(title, desp) {
   //可提供多种通知
   await serverNotify(title, desp);
