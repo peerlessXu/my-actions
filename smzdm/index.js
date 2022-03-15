@@ -17,7 +17,7 @@ let smzdmSign = async () => {
 	let referer = 'http://www.smzdm.com/qiandao/';
 	let url = 'https://zhiyou.smzdm.com/user/checkin/jsonp_checkin?callback=jQuery112409568846254764496_' + new Date().getTime() + '&_=' + new Date().getTime()
 	try {
-		const data = await request('get', url, { cookie: SMZDM_COOKIE, referer })
+		const {data} = await request('get', url, { cookie: SMZDM_COOKIE, referer })
 		console.log('data===', data);
 		if (data.indexOf('"error_code":0') != -1) {
 			console.log(new Date().Format("yyyy-MM-dd hh:mm:ss") + ' -- 什么值得买 签到成功!!!!');
