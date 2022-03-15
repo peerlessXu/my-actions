@@ -22,7 +22,7 @@ async function serverNotify(title = '', desp = '') {
   try {
     const url = `https://sctapi.ftqq.com/${WX_SEND_KEY}.send?title=${encodeURI(title)}&desp=${encodeURI(desp)}`;
     const res = await request('get', url);
-    console.log('mp send success', res)
+    console.log('mp send success', res.data)
   } catch (e) {
     console.error('mp send fail',e);
   }

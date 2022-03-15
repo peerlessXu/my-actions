@@ -2,7 +2,7 @@
 // create by xyfei
 
 const { sendNotify } = require('../sendNotify')
-const { request,getRandom } = require('../utils');
+const { request, getRandom } = require('../utils');
 
 // 公共变量
 const SMZDM_COOKIE = process.env.SMZDM_COOKIE
@@ -17,31 +17,42 @@ let smzdmSign = async () => {
 	let referer = 'http://www.smzdm.com/qiandao/';
 	let url = 'https://zhiyou.smzdm.com/user/checkin/jsonp_checkin?callback=jQuery112409568846254764496_' + new Date().getTime() + '&_=' + new Date().getTime()
 	try {
-		const {data} = await request('get', url, { cookie: SMZDM_COOKIE, referer })
-		console.log('data===', data);
+		const { data } = await request('get', url, { cookie: SMZDM_COOKIE, referer })
+		console.log('sign data===', data);
 		if (data.indexOf('"error_code":0') != -1) {
 			console.log(new Date().Format("yyyy-MM-dd hh:mm:ss") + ' -- 什么值得买 签到成功!!!!');
 			//记录签到日志
-			sendNotify('什么值得买【签到成功】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>内容: ${data}`);
+			sendNotify('什么值得买【签到成功】', `
+			时间: ${new Date().toLocaleString()}  
+			用户: ${SMZDM_USER} 
+			内容: ${data}
+			`);
 		} else {
 			//发邮件
-			sendNotify('什么值得买【签到报错】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${data}`);
+			sendNotify('什么值得买【签到报错】', `
+			时间: ${new Date().toLocaleString()} 
+			用户: ${SMZDM_USER} 
+			错误内容: ${data}`);
 		}
 	} catch (e) {
 		console.log(e);
 		//发邮件
-		sendNotify('什么值得买【签到报错】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${e}`);
+		sendNotify('什么值得买【签到报错】', `
+		时间: ${new Date().toLocaleString()}  
+		用户: ${SMZDM_USER} 
+		错误内容: ${e}`);
 	}
 
 }
 
 //延迟执行签到
-let setTimeSmzdmSign = (min,max) => {
+let setTimeSmzdmSign = (min, max) => {
+	let delay = getRandom(min, max)
 	setTimeout(() => {
 		//签到
 		smzdmSign();
 		console.log('签到！！');
-	}, getRandom(min,max));
+	}, delay);
 }
 
 setTimeSmzdmSign(10000, 20000)
