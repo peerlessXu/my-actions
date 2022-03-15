@@ -1,0 +1,26 @@
+{
+  "name": "my-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "nodemailer": "^6.7.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serve": "npm i && node index.js",
+    "smzdm": "npm i && node ./smzdm/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peerlessXu/my-actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peerlessXu/my-actions/issues"
+  },
+  "homepage": "https://github.com/peerlessXu/my-actions#readme"
+}
