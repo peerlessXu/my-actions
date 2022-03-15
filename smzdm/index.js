@@ -56,7 +56,7 @@ let setTimeSmzdmSign = (min, max) => {
 	}, delay);
 }
 
-setTimeSmzdmSign(10000, 20000)
+setTimeSmzdmSign(10000, 300000)
 
 
 // sendNotify('值得买签到', '恭喜签到成功')
