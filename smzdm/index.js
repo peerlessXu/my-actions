@@ -2,7 +2,7 @@
 // create by xyfei
 
 const { sendNotify } = require('../sendNotify')
-const { request } = require('./utils');
+const { request } = require('../utils');
 
 // 公共变量
 const SMZDM_COOKIE = process.env.SMZDM_COOKIE
