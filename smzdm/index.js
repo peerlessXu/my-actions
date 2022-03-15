@@ -22,15 +22,15 @@ let smzdmSign = async () => {
 		if (data.indexOf('"error_code":0') != -1) {
 			console.log(new Date().Format("yyyy-MM-dd hh:mm:ss") + ' -- 什么值得买 签到成功!!!!');
 			//记录签到日志
-			sendNotify('什么值得买【签到成功】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>内容: ${data}`);
+			sendNotify('什么值得买【签到成功】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>内容: ${data}`);
 		} else {
 			//发邮件
-			sendNotify('什么值得买【签到报错】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${data}`);
+			sendNotify('什么值得买【签到报错】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${data}`);
 		}
 	} catch (e) {
 		console.log(e);
 		//发邮件
-		sendNotify('什么值得买【签到报错】', `时间: ${new Date().Format("yyyy-MM-dd hh:mm:ss")}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${e}`);
+		sendNotify('什么值得买【签到报错】', `时间: ${new Date().toLocaleString()}  <br/>用户: ${SMZDM_USER} <br/>错误内容: ${e}`);
 	}
 
 }
