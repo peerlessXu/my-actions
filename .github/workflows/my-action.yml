@@ -1,12 +1,11 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  sendmails:
+  smzdm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: 14.x
       - name: npm install
@@ -18,4 +17,6 @@ jobs:
           SEND_EMAIL: ${{ secrets.SEND_EMAIL }}
           RECEIVE_EMAIL: ${{ secrets.RECEIVE_EMAIL }}
           SEND_EMAIL_PASS: ${{ secrets.SEND_EMAIL_PASS }}
+          SMZDM_COOKIE: ${{ secrets.SMZDM_COOKIE }}
+          SMZDM_USER: ${{ secrets.SMZDM_USER }}
           

@@ -6,6 +6,44 @@ const instance = axios.create({
   withCredentials: false // 表示跨域请求时是否需要使用凭证
 })
 
+// 请求拦截
+instance.interceptors.request.use(
+  (config) => {
+    if (config.method === 'get') {
+      config.params &&
+        Object.keys(config.params).forEach((item) => {
+          if (
+            config.params[item] === null ||
+            config.params[item] === undefined
+          ) {
+            config.params[item] = ''
+          }
+        })
+    } else {
+      config.data &&
+        Object.keys(config.data).forEach((item) => {
+          if (config.data[item] === null || config.data[item] === undefined) {
+            config.data[item] = ''
+          }
+        })
+    }
+    if (config.requestConfig && config.requestConfig.cookie) {
+      config.headers['Cookie'] = config.requestConfig.cookie
+    }
+    if(config.requestConfig && config.requestConfig.referer){
+      config.headers['Referer'] = config.requestConfig.referer
+    }
+    return config
+  },
+  (error) => {
+    notification.error({
+      message: '提示',
+      description: error
+    })
+    return Promise.reject(error)
+  }
+)
+
 /**
  *
  * @param {String} method 请求方法(get|post|put|patch|delete...)

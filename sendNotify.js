@@ -9,29 +9,26 @@ const SEND_EMAIL = process.env.SEND_EMAIL;
 const RECEIVE_EMAIL = process.env.RECEIVE_EMAIL;
 const SEND_EMAIL_PASS = process.env.SEND_EMAIL_PASS;
 
-console.log(SEND_EMAIL,RECEIVE_EMAIL)
-
 async function sendNotify(title, desp) {
   //可提供多种通知
   await serverNotify(title, desp);
   await emailNotify(title, desp);
 }
 
-// =======================================微信server酱通知设置区域===========================================
+// =======================================微信server酱通知===========================================
 //此处填你申请的SEND_KEY.
 //注：此处设置github action用户填写到Settings-Secrets里面(Name输入WX_SEND_KEY)
 async function serverNotify(title = '', desp = '') {
   try {
-    const url = `https://sctapi.ftqq.com/${WX_SEND_KEY}.send?title=${encodeURI(
-      title
-    )}&desp=${encodeURI(desp)}`;
+    const url = `https://sctapi.ftqq.com/${WX_SEND_KEY}.send?title=${encodeURI(title)}&desp=${encodeURI(desp)}`;
     const res = await request('get', url);
+    console.log('mp send success', res)
   } catch (e) {
-    console.error(e);
+    console.error('mp send fail',e);
   }
 }
 
-// =======================================邮件通知设置区域===========================================
+// =======================================邮件通知===========================================
 async function emailNotify(title = '', desp = '') {
   let transporter = nodemailer.createTransport({
     host: 'smtp.126.com',
@@ -52,9 +49,9 @@ async function emailNotify(title = '', desp = '') {
 
   function mailCallback(error, info) {
     if (error) {
-      return console.log(error);
+      return console.log('email send fail',error);
     }
-    console.log('Message sent: ' + info.response);
+    console.log('email send success: ' + info.response);
   }
 
   transporter.sendMail(mailOptions, mailCallback);
